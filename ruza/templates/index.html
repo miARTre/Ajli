@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruza - YouTube efekt</title>
+
+    <!-- Dodajemo Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(to right, #ff7f7f, #ffccd5); /* Pastelna pozadina */
+            margin: 0;
+            font-family: 'Poppins', sans-serif; /* Poppins za celokupni tekst */
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            perspective: 1500px; /* Dodajemo perspektivu za 3D efekat */
+        }
+
+        .quote {
+            position: absolute;
+            top: 70px; /* Postavljamo citat neposredno iznad glavne ruže */
+            font-size: 22px; /* Manji font za citat */
+            font-family: 'Lora', serif; /* Lora za citat */
+            font-style: italic;
+            color: white;
+            text-align: center;
+            width: 70%; /* Manja širina za lepši izgled */
+            z-index: 2; /* Osiguravamo da bude iznad latica */
+            background-color: rgba(255, 99, 71, 0.7); /* Pozadina citata sa prozirnim crvenim tonom */
+            padding: 15px 25px;
+            border-radius: 25px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            text-transform: none;
+        }
+
+        .rose-icon {
+            font-size: 300px; /* Velika centralna ruža */
+            position: absolute;
+            animation: bloom 2s ease-out infinite; /* Kontrolisano cvjetanje, bez rotacije */
+            z-index: 1; /* Osiguravamo da bude na vrhu */
+        }
+
+        @keyframes bloom {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1); /* Ruža raste kao da cvjeta */
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .falling-rose {
+            position: absolute;
+            font-size: 40px; /* Veći font za latice */
+            opacity: 1;
+            z-index: 0; /* Osiguravamo da latice budu ispod svega */
+            pointer-events: none; /* Onemogućavamo interakciju sa laticama */
+            animation: fall 5s linear infinite; /* Animacija pada */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh); /* Latice padaju kroz ekran */
+                opacity: 0;
+            }
+        }
+
+        .take-rose {
+            position: absolute;
+            bottom: 150px;
+            font-size: 24px;
+            font-family: 'Lora', serif; /* Lora font za citat i dugme */
+            font-style: italic;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            z-index: 2;
+            background-color: rgba(255, 99, 71, 0.8); /* Lagana pozadina */
+            padding: 15px 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .take-rose a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            background-color: lightcoral;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Poppins', sans-serif; /* Poppins za dugme */
+        }
+
+        button:hover {
+            background-color: coral;
+        }
+    </style>
+</head>
+<body>
+    <!-- Citat stilizovan kao dugme -->
+    <!-- Velika ruža u centru -->
+    <div class="rose-icon">🌹</div>
+
+    <!-- Tekst ispod ruže -->
+    <div class="take-rose">
+        <a href="{% url 'citat1' %}">Uzmi ružu</a>
+    </div>
+
+    <script>
+        // Generisanje padajućih latica sa nasumičnim pozicijama
+        function generateFallingRoses() {
+            const roseContainer = document.body;
+            const numberOfRoses = 10; // Smanjen broj latica
+            const roseSize = 40; // Veličina latica
+
+            for (let i = 0; i < numberOfRoses; i++) {
+                const rose = document.createElement('div');
+                rose.classList.add('falling-rose');
+                rose.innerHTML = '🌹'; // Ruža ikona
+
+                // Nasumična pozicija
+                const randomX = Math.random() * window.innerWidth;  // Latica se pojavljuje sa nasumične pozicije (celokupna širina ekrana)
+                const randomY = -50; // Latice počinju iznad ekrana
+
+                // Podesite brzinu pada
+                const fallSpeed = 5 + Math.random() * 2; // Slučajna brzina pada (5-7 sekundi)
+
+                // Dodajemo stil i poziciju latica
+                rose.style.left = `${randomX}px`;
+                rose.style.top = `${randomY}px`;
+                rose.style.animationDuration = `${fallSpeed}s`; // Brzina pada latica
+
+                roseContainer.appendChild(rose);  // Dodajemo laticu u telo stranice
+            }
+        }
+
+        // Pozivamo funkciju da generišemo latice
+        generateFallingRoses();
+
+        // Opcionalno, osvežavamo latice svake 3 sekunde
+        setInterval(generateFallingRoses, 3000); // Latice padaju svakih 3 sekunde
+    </script>
+</body>
+</html>
