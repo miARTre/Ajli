@@ -1,0 +1,34 @@
+# Python fajlovi
+*.pyc
+*.pyo
+__pycache__/
+
+# Virtualno okruženje
+venv/
+env/
+ENV/
+
+# Django specifični fajlovi
+db.sqlite3
+*.sqlite3
+/media/
+*.log
+
+# Static i media fajlovi
+/staticfiles/
+/mediafiles/
+
+# Sistem specifični fajlovi
+.DS_Store
+Thumbs.db
+
+# Netlify specifične datoteke
+build/
+
+# Postavke za IDE-ove
+.vscode/
+.idea/
+*.swp
+
+# Osjetljivi podaci
+.env
