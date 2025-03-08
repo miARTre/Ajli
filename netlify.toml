@@ -1,5 +1,5 @@
 [build]
-  command = "mise settings set python.compile false && python -m pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  command = "python -m pip install --verbose -r requirements.txt && python manage.py collectstatic --noinput"
   publish = "public"
 
 [build.environment]
