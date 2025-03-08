@@ -1,10 +1,4 @@
 [build]
-  command = "python manage.py collectstatic --noinput"
-  publish = "staticfiles"
-
-[build.environment]
-  PYTHON_VERSION = "3.12.0"
-
-[build]
-command = "mise settings set python.compile false && python -m pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  command = "mise settings set python.compile false && python -m pip install -r requirements.txt && python manage.py collectstatic --noinput"
+  publish = "public"
 
