@@ -1,0 +1,6 @@
+[build]
+  command = "python manage.py collectstatic --noinput"
+  publish = "staticfiles"
+
+[functions]
+  python_runtime = "3.8"
