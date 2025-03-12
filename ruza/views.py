@@ -11,3 +11,6 @@ def citat2(request):
 
 def citat2(request):
     return render(request, 'citat2.html')
+
+def citat2(request):
+    return render(request, 'citat2.html')
